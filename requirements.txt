@@ -1,2 +1,4 @@
 streamlit
 pymongo
+ObjectId
+quote_plus
