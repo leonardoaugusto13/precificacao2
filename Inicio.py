@@ -10,7 +10,7 @@ password = quote_plus("August@123")
 
 # Configuração do cliente MongoDB
 #client = MongoClient('mongodb://localhost:27017/' , serverSelectionTimeoutMS=30000, socketTimeoutMS=30000 )
-client = MongoClient(f'mongodb+srv://{username}:{password}@precificacao.axzys.mongodb.net/?retryWrites=true&w=majority&appName=Precificacao',serverSelectionTimeoutMS=50000, socketTimeoutMS=50000)
+client = MongoClient(f'mongodb+srv://{username}:{password}@precificacao.axzys.mongodb.net/?retryWrites=true&w=majority&appName=Precificacao',serverSelectionTimeoutMS=150000, socketTimeoutMS=150000)
 db = client.precificacao
 colecao_login = db['login']
 colecao_dados = db['answers_dados']
