@@ -17,34 +17,35 @@ colecao_dados = db['answers_dados']
 colecao_lancamentos = db['answers_lancamento']
 colecao_pos = db['answers_pos']
 
-def verificar_credenciais(login, senha):
-    usuario = colecao_login.find_one({"login": login})
-    if usuario:
-        senha_armazenada = usuario.get("senha")
-        tipo_usuario = usuario.get("tipo")
-        cliente_id = usuario.get("cliente_id")  # Obter o ID do usuário
-        return senha_armazenada == senha, tipo_usuario, cliente_id
-    return False, None, None
+# Função para verificar as credenciais do usuário
+def verify_login(username, password):
+    db = get_db_connection()
+    
+    # Verifica se a conexão com o banco de dados foi estabelecida
+    if db is None:
+        st.error("Conexão com o banco de dados falhou. Tente novamente mais tarde.")
+        return False
 
-# Página Login
-def pagina_login():
-    st.title("Página de Login")
-
-    # Campos para o login
-    login = st.text_input("Login", key="login_input_unico")
-    senha = st.text_input("Senha", type='password', key="password_input_unico")
-
-    if st.button("Entrar", key="entrar_button"):
-        login_valido, tipo_usuario, cliente_id = verificar_credenciais(login, senha)
-        if login_valido:
-            st.session_state['login'] = True
-            st.session_state['tipo_usuario'] = tipo_usuario  # Armazenar o tipo de usuário na sessão
-            st.session_state['cliente_id'] = cliente_id  # Armazenar o ID do usuário na sessão
-            st.session_state['dados_existentes'] = colecao_dados.find_one({"cliente_id": cliente_id}) or {}
-            st.success("Login bem-sucedido!")
-            st.rerun()  # Recarregar para refletir o estado de login
+    try:
+        # Acessa a coleção de usuários
+        users = db["users"]
+        
+        # Mostra uma mensagem enquanto verifica o usuário
+        st.info("Verificando as credenciais...")
+        
+        # Realiza a busca do usuário no banco de dados
+        user = users.find_one({"username": username, "password": password})
+        
+        if user:
+            st.success("Login realizado com sucesso!")
+            return True
         else:
-            st.error("Login ou senha incorretos.")
+            st.error("Usuário ou senha incorretos. Tente novamente.")
+            return False
+    except Exception as e:
+        st.error(f"Erro ao verificar o login: {e}")
+        return False
+
 
 def pagina_dados():
     st.title('Dados')  # Título da página
