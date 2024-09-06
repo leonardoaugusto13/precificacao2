@@ -1,7 +1,7 @@
 import streamlit as st
 from pymongo import MongoClient
 from urllib.parse import quote_plus
-from bson.objectid import ObjectId
+
 
 # Codificar a senha para incluir na URI
 username = "leonardoaugusto199813"
