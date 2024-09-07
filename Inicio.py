@@ -477,6 +477,7 @@ def pagina_pos_politicas():
     st.title('Pós')
     st.info('🟡 Preencha os campos com as informações solicitadas 🟡')
 
+
     # Inicializa os valores na sessão
     if 'projeto_meses_pos' not in st.session_state:
         st.session_state['projeto_meses_pos'] = 0.0
@@ -488,6 +489,25 @@ def pagina_pos_politicas():
         st.session_state['plat_pos'] = 0.0
     if 'imp_pos' not in st.session_state:
         st.session_state['imp_pos'] = 0.0
+    
+    # Inicializa os valores faltantes no session_state
+    if 'comissao_p2' not in st.session_state:
+        st.session_state['comissao_p2'] = 0.0
+    if 'comissao_m2' not in st.session_state:
+        st.session_state['comissao_m2'] = 0.0
+    if 'comissao_g2' not in st.session_state:
+        st.session_state['comissao_g2'] = 0.0
+    if 'cliente_p2' not in st.session_state:
+        st.session_state['cliente_p2'] = 0.0
+    if 'cliente_m2' not in st.session_state:
+        st.session_state['cliente_m2'] = 0.0
+    if 'cliente_g2' not in st.session_state:
+        st.session_state['cliente_g2'] = 0.0
+    if 'contribuicao_cliente' not in st.session_state:
+        st.session_state['contribuicao_cliente'] = 0.0
+    if 'aliquota_imposto' not in st.session_state:
+        st.session_state['aliquota_imposto'] = 0.0
+        st.session_state['imp_pos'] = 0.0
 
     # Definindo os inputs com valores inicializados corretamente como float
     st.session_state['projeto_meses_pos'] = st.number_input("Total de Meses do Projeto", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['projeto_meses_pos']), key="projeto_meses_pos_input")
@@ -495,6 +515,50 @@ def pagina_pos_politicas():
     st.session_state['traf_pos'] = st.number_input("Trafego %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['traf_pos']), key="traf_pos_input")
     st.session_state['plat_pos'] = st.number_input("Plataforma %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['plat_pos']), key="plat_pos_input")
     st.session_state['imp_pos'] = st.number_input("Imposto %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['imp_pos']), key="imp_pos_input")
+
+    contribuicao_cliente = 0.0 
+    comissao_p2 = 0.0 
+    comissao_m2 = 0.0
+    comissao_g2 = 0.0
+    cliente_p2 = 0.0 
+    cliente_m2 = 0.0
+    cliente_g2 = 0.0
+    aliquota_imposto = 0.0
+    
+    # Recupera o ID do usuário da sessão
+    cliente_id = st.session_state.get('cliente_id')
+    if not cliente_id:
+        st.error("Usuário não autenticado.")
+        return
+
+    dados_fiscais = colecao_dados.find_one({'cliente_id': cliente_id})
+    aliquota_imposto_dados = colecao_dados.find_one({'cliente_id': cliente_id})
+    comissao_p_lacamentos2= colecao_pos.find_one({'cliente_id': cliente_id})
+    comissao_m_lacamentos2 = colecao_pos.find_one({'cliente_id': cliente_id})
+    comissao_g_lacamentos2 = colecao_pos.find_one({'cliente_id': cliente_id})
+    cliente_p_lacamentos2= colecao_pos.find_one({'cliente_id': cliente_id})
+    cliente_m_lacamentos2 = colecao_pos.find_one({'cliente_id': cliente_id})
+    cliente_g_lacamentos2 = colecao_pos.find_one({'cliente_id': cliente_id})
+
+
+    if dados_fiscais:
+        contribuicao_cliente = dados_fiscais.get('contribuicao_cliente', 0.0)
+    if aliquota_imposto_dados:
+        aliquota_imposto = dados_fiscais.get('aliquota_imposto', 0.0)
+    if comissao_p_lacamentos2:
+        comissao_p2 = comissao_p_lacamentos2.get('comissao_p', 0.0)
+    if comissao_m_lacamentos2:
+        comissao_m2 = comissao_m_lacamentos2.get('comissao_m', 0.0)
+    if comissao_g_lacamentos2:
+        comissao_g2 = comissao_g_lacamentos2.get('comissao_g', 0.0)
+    if cliente_p_lacamentos2:
+        cliente_p2 = cliente_p_lacamentos2.get('cliente_p', 0.0)
+    if cliente_m_lacamentos2:
+        cliente_m2 = cliente_m_lacamentos2.get('cliente_m', 0.0)
+    if cliente_g_lacamentos2:
+        cliente_g2 = cliente_g_lacamentos2.get('cliente_g', 0.0)
+
+
 
     if st.button("Enviar", key="pos_politicas_enviar_button"):
         projeto_meses_pos = st.session_state['projeto_meses_pos']
