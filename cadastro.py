@@ -14,18 +14,18 @@ colecao_login = db['login']
 
 result = colecao_login.insert_many([
     {
-        "login": "dotlemon_master",
-        "senha": "dotlemon" , 
+        "login": "sara_camila",
+        "senha": "sara_sara" , 
         "tipo": 1 ,
-        "cliente_id" : "2" ,
-        "cliente" : "dotlemon"
+        "cliente_id" : "3" ,
+        "cliente" : "Teste"
     },
     {
-        "login": "operacional_dotlemon",
-        "senha": "opdot" , 
+        "login": "operacional_sara",
+        "senha": "sara_iod" , 
         "tipo": 0 ,
-        "cliente_id" : "2"  ,
-        "cliente" : "dotlemon"
+        "cliente_id" : "3"  ,
+        "cliente" : "Teste"
     }
     #{
     #    "login": "login1",

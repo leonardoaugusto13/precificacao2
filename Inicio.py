@@ -28,7 +28,7 @@ def verificar_credenciais(login, senha):
 
 # Página Login
 def pagina_login():
-    st.title("Página de Login")
+    st.title("Login")
 
     # Campos para o login
     login = st.text_input("Login", key="login_input_unico")
