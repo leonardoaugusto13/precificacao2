@@ -351,13 +351,49 @@ def pagina_lancamentos_politicas():
     st.session_state['imp'] = st.number_input("Imposto %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['imp']), key="imp_input")
 
     # Busca o valor de contribuicao_cliente na coleção 'answers_dados' com base no cliente_id
-    contribuicao_cliente = 0.0
+    contribuicao_cliente = 0.0 
+    comissao_p = 0.0 
+    comissao_m = 0.0
+    comissao_g = 0.0
+    cliente_p = 0.0 
+    cliente_m = 0.0
+    cliente_g = 0.0
+    aliquota_imposto = 0.0
+    
     dados_fiscais = colecao_dados.find_one({'cliente_id': cliente_id})
+    aliquota_imposto_dados = colecao_dados.find_one({'cliente_id': cliente_id})
+    comissao_p_lacamentos= colecao_lancamentos.find_one({'cliente_id': cliente_id})
+    comissao_m_lacamentos = colecao_lancamentos.find_one({'cliente_id': cliente_id})
+    comissao_g_lacamentos = colecao_lancamentos.find_one({'cliente_id': cliente_id})
+    cliente_p_lacamentos= colecao_lancamentos.find_one({'cliente_id': cliente_id})
+    cliente_m_lacamentos = colecao_lancamentos.find_one({'cliente_id': cliente_id})
+    cliente_g_lacamentos = colecao_lancamentos.find_one({'cliente_id': cliente_id})
+
+
     if dados_fiscais:
         contribuicao_cliente = dados_fiscais.get('contribuicao_cliente', 0.0)
+    if aliquota_imposto_dados:
+        aliquota_imposto = dados_fiscais.get('aliquota_imposto', 0.0)
+    if comissao_p_lacamentos:
+        comissao_p = comissao_p_lacamentos.get('comissao_p', 0.0)
+    if comissao_m_lacamentos:
+        comissao_m = comissao_m_lacamentos.get('comissao_m', 0.0)
+    if comissao_g_lacamentos:
+        comissao_g = comissao_g_lacamentos.get('comissao_g', 0.0)
+    if cliente_p_lacamentos:
+        cliente_p = cliente_p_lacamentos.get('cliente_p', 0.0)
+    if cliente_m_lacamentos:
+        cliente_m = cliente_m_lacamentos.get('cliente_m', 0.0)
+    if cliente_g_lacamentos:
+        cliente_g = cliente_g_lacamentos.get('cliente_g', 0.0)
+
+
 
     # Salva a contribuicao_cliente na sessão
     st.session_state['contribuicao_cliente'] = contribuicao_cliente
+    st.session_state['comissao_p'] = comissao_p
+    st.session_state['comissao_m'] = comissao_m
+    st.session_state['comissao_g'] = comissao_g
 
     if st.button("Enviar", key="lancamentos_politicas_enviar_button"):
         projeto_meses = st.session_state['projeto_meses']
@@ -375,13 +411,13 @@ def pagina_lancamentos_politicas():
         st.session_state['depesas'] = traf_valor + plat_valor + imp_valor
         despesas = st.session_state['depesas']
 
-        comissao_p = st.session_state['comissao_p']
-        cliente_p = st.session_state['cliente_p']
-        comissao_m = st.session_state['comissao_m']
-        cliente_m = st.session_state['cliente_m']
-        comissao_g = st.session_state['comissao_g']
-        contribuicao_cliente = st.session_state['contribuicao_cliente']
-        aliquota_imposto = st.session_state['aliquota_imposto']
+        #comissao_p = st.session_state['comissao_p']
+        #cliente_p = st.session_state['cliente_p']
+        #comissao_m = st.session_state['comissao_m']
+        #cliente_m = st.session_state['cliente_m']
+        #comissao_g = st.session_state['comissao_g']
+        #contribuicao_cliente = st.session_state['contribuicao_cliente']
+        #aliquota_imposto = st.session_state['aliquota_imposto']
 
         st.success("Dados enviados com sucesso!")
         st.write(f'Trafego R$: {traf_valor} ')
