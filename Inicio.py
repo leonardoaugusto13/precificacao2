@@ -100,7 +100,7 @@ def pagina_dados():
         st.write(f"Despesa/Receita: {dados_novos['despesa_receita']:.0f}%")
 
 # Função para exibir a página de Lançamentos
-def pagina_lancamentos():
+
     st.title('POLÍTICAS LANÇAMENTOS')
     st.info('🟡 Preencha os campos com as informações solicitadas 🟡')
 
@@ -166,7 +166,7 @@ def pagina_lancamentos():
 
 
 # Função para exibir a página de Lançamentos pos
-def pagina_policas_pos():
+
     st.title('POLÍTICAS PÓS')
     st.info('🟡 Preencha os campos com as informações solicitadas 🟡')
 
@@ -652,10 +652,6 @@ def main():
         
         if pagina_selecionada == "Dados":
             pagina_dados()
-        elif pagina_selecionada == "Políticas Lançamentos":
-            pagina_lancamentos()
-        elif pagina_selecionada == "Políticas Pós":
-            pagina_policas_pos()
         elif pagina_selecionada == "Avulsos":
             pagina_avulsos()
         elif pagina_selecionada == "Lançamentos":
