@@ -644,7 +644,7 @@ def main():
 
     if st.session_state['login']:
         if st.session_state['tipo_usuario'] == 1:
-            opcoes = ["Dados", "Políticas Lançamentos", "Políticas Pós", "Avulsos", "Lançamentos", "Pós"]
+            opcoes = ["Dados","Avulsos", "Lançamentos", "Pós"]
         else:
             opcoes = ["Avulsos", "Lançamentos", "Pós"]
         
