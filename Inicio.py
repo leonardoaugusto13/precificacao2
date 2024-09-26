@@ -101,7 +101,7 @@ def pagina_dados():
 
 # Função para exibir a página de Lançamentos
 
-    st.title('POLÍTICAS LANÇAMENTOS')
+    st.title('POLÍTICAS')
     st.info('🟡 Preencha os campos com as informações solicitadas 🟡')
 
     # Recupera o ID do usuário da sessão
@@ -159,72 +159,6 @@ def pagina_dados():
         colecao_lancamentos.update_one(
             {"cliente_id": cliente_id},  # Use o cliente_id diretamente na consulta
             {'$set': dados_lancamentos},
-            upsert=True
-        )
-
-        st.success("Dados enviados com sucesso!")
-
-
-# Função para exibir a página de Lançamentos pos
-
-    st.title('POLÍTICAS PÓS')
-    st.info('🟡 Preencha os campos com as informações solicitadas 🟡')
-
-    # Recupera o ID do usuário da sessão
-    cliente_id = st.session_state.get('cliente_id')
-    if not cliente_id:
-        st.error("Usuário não autenticado.")
-        return
-
-    # Inicializa os valores na sessão se não existirem
-    if 'cliente_p2' not in st.session_state:
-        st.session_state['cliente_p2'] = 0.0
-    if 'cliente_m2' not in st.session_state:
-        st.session_state['cliente_m2'] = 0.0
-    if 'comissao_p2' not in st.session_state:
-        st.session_state['comissao_p2'] = 0.0
-    if 'comissao_m2' not in st.session_state:
-        st.session_state['comissao_m2'] = 0.0
-    if 'comissao_g2' not in st.session_state:
-        st.session_state['comissao_g2'] = 0.0
-
-    # Carrega os dados do MongoDB se disponíveis
-    user_data = colecao_pos.find_one({'cliente_id': cliente_id})
-    if user_data:
-        st.session_state['cliente_p2'] = user_data.get('cliente_p2', 0.0)
-        st.session_state['cliente_m2'] = user_data.get('cliente_m2', 0.0)
-        st.session_state['comissao_p2'] = user_data.get('comissao_p2', 0.0)
-        st.session_state['comissao_m2'] = user_data.get('comissao_m2', 0.0)
-        st.session_state['comissao_g2'] = user_data.get('comissao_g2', 0.0)
-
-    # Cria inputs para os dados
-    st.session_state['cliente_p2'] = st.number_input("Cliente P (Faturamento Máximo)", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['cliente_p2']), key="cliente_p2_input")
-    st.session_state['cliente_m2'] = st.number_input("Cliente M (Faturamento Máximo)", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['cliente_m2']), key="cliente_m2_input")
-    st.session_state['comissao_p2'] = st.number_input("Cliente P (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_p2']), key="comissao_p2_input")
-    st.session_state['comissao_m2'] = st.number_input("Cliente M (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_m2']), key="comissao_m2_input")
-    st.session_state['comissao_g2'] = st.number_input("Cliente G (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_g2']), key="comissao_g2_input")
-
-    if st.button("Enviar", key="pos_enviar_button"):
-        cliente_p2 = st.session_state['cliente_p2']
-        cliente_m2 = st.session_state['cliente_m2']
-        comissao_p2 = st.session_state['comissao_p2']
-        comissao_m2 = st.session_state['comissao_m2']
-        comissao_g2 = st.session_state['comissao_g2']
-
-        # Define o dicionário de dados a ser atualizado ou inserido
-        dados_pos = {
-            "cliente_id": cliente_id,  # Use o cliente_id diretamente
-            "cliente_p2": cliente_p2,
-            "cliente_m2": cliente_m2,
-            "comissao_p2": comissao_p2,
-            "comissao_m2": comissao_m2,
-            "comissao_g2": comissao_g2
-        }
-
-        # Atualiza ou insere os dados na coleção
-        colecao_pos.update_one(
-            {'cliente_id': cliente_id},  # Use o cliente_id diretamente na consulta
-            {'$set': dados_pos},
             upsert=True
         )
 
