@@ -61,11 +61,11 @@ def pagina_dados():
     clientes_medios = dados_existentes.get('clientes_medios', 0)
 
     # Campos de entrada para os dados financeiros
-    folha_pagamento = st.number_input("Gastos com Folha de Pagamento (Anual): R$", min_value=0.0, step=0.01, format="%.2f", value=folha_pagamento, key="folha_pagamento_input")
-    despesas_operacionais = st.number_input("Despesas Operacionais (Anual): R$", min_value=0.0, step=0.01, format="%.2f", value=despesas_operacionais, key="despesas_operacionais_input")
-    despesas_administrativas = st.number_input("Despesas Administrativas (Anual): R$", min_value=0.0, step=0.01, format="%.2f", value=despesas_administrativas, key="despesas_administrativas_input")
-    impostos_pagos = st.number_input("Impostos Pagos (Anual): R$", min_value=0.0, step=0.01, format="%.2f", value=impostos_pagos, key="impostos_pagos_input")
-    faturamento = st.number_input("Faturamento (Anual): R$", min_value=0.0, step=0.01, format="%.2f", value=faturamento, key="faturamento_input")
+    folha_pagamento = st.number_input("Gastos com Folha de Pagamento (Anual): R$", min_value=0.0, step=1000.0, format="%.2f", value=folha_pagamento, key="folha_pagamento_input")
+    despesas_operacionais = st.number_input("Despesas Operacionais (Anual): R$", min_value=0.0, step=1000.0, format="%.2f", value=despesas_operacionais, key="despesas_operacionais_input")
+    despesas_administrativas = st.number_input("Despesas Administrativas (Anual): R$", min_value=0.0, step=1000.0, format="%.2f", value=despesas_administrativas, key="despesas_administrativas_input")
+    impostos_pagos = st.number_input("Impostos Pagos (Anual): R$", min_value=0.0, step=1000.0, format="%.2f", value=impostos_pagos, key="impostos_pagos_input")
+    faturamento = st.number_input("Faturamento (Anual): R$", min_value=0.0, step=1000.0, format="%.2f", value=faturamento, key="faturamento_input")
     clientes_medios = st.number_input("Quantidade média de Clientes (Mês):", min_value=0, step=1, format="%d", value=clientes_medios, key="clientes_medios_input")
     
 
@@ -132,11 +132,11 @@ def pagina_dados():
         st.session_state['comissao_g'] = user_data.get('comissao_g', 0.0)
 
     # Cria inputs para os dados
-    st.session_state['cliente_p'] = st.number_input("Cliente P (Faturamento Máximo)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['cliente_p']), key="cliente_p_input")
-    st.session_state['cliente_m'] = st.number_input("Cliente M (Faturamento Máximo)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['cliente_m']), key="cliente_m_input")
-    st.session_state['comissao_p'] = st.number_input("Cliente P (% Comissão)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['comissao_p']), key="comissao_p_input")
-    st.session_state['comissao_m'] = st.number_input("Cliente M (% Comissão)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['comissao_m']), key="comissao_m_input")
-    st.session_state['comissao_g'] = st.number_input("Cliente G (% Comissão)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['comissao_g']), key="comissao_g_input")
+    st.session_state['cliente_p'] = st.number_input("Cliente P (Faturamento Máximo)", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['cliente_p']), key="cliente_p_input")
+    st.session_state['cliente_m'] = st.number_input("Cliente M (Faturamento Máximo)", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['cliente_m']), key="cliente_m_input")
+    st.session_state['comissao_p'] = st.number_input("Cliente P (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_p']), key="comissao_p_input")
+    st.session_state['comissao_m'] = st.number_input("Cliente M (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_m']), key="comissao_m_input")
+    st.session_state['comissao_g'] = st.number_input("Cliente G (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_g']), key="comissao_g_input")
 
     if st.button("Enviar", key="lancamentos_enviar_button"):
         cliente_p = st.session_state['cliente_p']
@@ -198,11 +198,11 @@ def pagina_dados():
         st.session_state['comissao_g2'] = user_data.get('comissao_g2', 0.0)
 
     # Cria inputs para os dados
-    st.session_state['cliente_p2'] = st.number_input("Cliente P (Faturamento Máximo)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['cliente_p2']), key="cliente_p2_input")
-    st.session_state['cliente_m2'] = st.number_input("Cliente M (Faturamento Máximo)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['cliente_m2']), key="cliente_m2_input")
-    st.session_state['comissao_p2'] = st.number_input("Cliente P (% Comissão)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['comissao_p2']), key="comissao_p2_input")
-    st.session_state['comissao_m2'] = st.number_input("Cliente M (% Comissão)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['comissao_m2']), key="comissao_m2_input")
-    st.session_state['comissao_g2'] = st.number_input("Cliente G (% Comissão)", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['comissao_g2']), key="comissao_g2_input")
+    st.session_state['cliente_p2'] = st.number_input("Cliente P (Faturamento Máximo)", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['cliente_p2']), key="cliente_p2_input")
+    st.session_state['cliente_m2'] = st.number_input("Cliente M (Faturamento Máximo)", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['cliente_m2']), key="cliente_m2_input")
+    st.session_state['comissao_p2'] = st.number_input("Cliente P (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_p2']), key="comissao_p2_input")
+    st.session_state['comissao_m2'] = st.number_input("Cliente M (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_m2']), key="comissao_m2_input")
+    st.session_state['comissao_g2'] = st.number_input("Cliente G (% Comissão)", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['comissao_g2']), key="comissao_g2_input")
 
     if st.button("Enviar", key="pos_enviar_button"):
         cliente_p2 = st.session_state['cliente_p2']
@@ -278,18 +278,18 @@ def pagina_avulsos():
     st.session_state['aliquota_imposto'] = aliquota_imposto
 
     # Campos de entrada para os dados financeiros
-    st.session_state['folha_pagamento2'] = st.number_input("% Reinvestimento", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento2'], key="folha_pagamento2_input")
-    st.session_state['folha_pagamento3'] = st.number_input("% Margem", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento3'], key="folha_pagamento3_input")
-    st.session_state['folha_pagamento4'] = st.number_input("Custo hora Copy", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento4'], key="folha_pagamento4_input")
-    st.session_state['folha_pagamento5'] = st.number_input("Horas Gastas Copy", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento5'], key="folha_pagamento5_input")
-    st.session_state['folha_pagamento6'] = st.number_input("Custo Hora Design", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento6'], key="folha_pagamento6_input")
-    st.session_state['folha_pagamento7'] = st.number_input("Horas Gastas Design", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento7'], key="folha_pagamento7_input")
-    st.session_state['folha_pagamento8'] = st.number_input("Custo Hora Trafego", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento8'], key="folha_pagamento8_input")
-    st.session_state['folha_pagamento9'] = st.number_input("Horas Gastas Trafego", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento9'], key="folha_pagamento9_input")
-    st.session_state['folha_pagamento10'] = st.number_input("Custo Hora Automação", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento10'], key="folha_pagamento10_input")
-    st.session_state['folha_pagamento11'] = st.number_input("Horas Gastas Automação", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento11'], key="folha_pagamento11_input")
-    st.session_state['folha_pagamento12'] = st.number_input("Custo Hora Inbound", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento12'], key="folha_pagamento12_input")
-    st.session_state['folha_pagamento13'] = st.number_input("Horas Gastas Inbound", min_value=0.0, step=0.01, format="%.2f", value=st.session_state['folha_pagamento13'], key="folha_pagamento13_input")
+    st.session_state['folha_pagamento2'] = st.number_input("% Reinvestimento", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento2'], key="folha_pagamento2_input")
+    st.session_state['folha_pagamento3'] = st.number_input("% Margem", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento3'], key="folha_pagamento3_input")
+    st.session_state['folha_pagamento4'] = st.number_input("Custo hora Copy", min_value=0.0, step=100.0, format="%.2f", value=st.session_state['folha_pagamento4'], key="folha_pagamento4_input")
+    st.session_state['folha_pagamento5'] = st.number_input("Horas Gastas Copy", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento5'], key="folha_pagamento5_input")
+    st.session_state['folha_pagamento6'] = st.number_input("Custo Hora Design", min_value=0.0, step=100.0, format="%.2f", value=st.session_state['folha_pagamento6'], key="folha_pagamento6_input")
+    st.session_state['folha_pagamento7'] = st.number_input("Horas Gastas Design", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento7'], key="folha_pagamento7_input")
+    st.session_state['folha_pagamento8'] = st.number_input("Custo Hora Trafego", min_value=0.0, step=100.0, format="%.2f", value=st.session_state['folha_pagamento8'], key="folha_pagamento8_input")
+    st.session_state['folha_pagamento9'] = st.number_input("Horas Gastas Trafego", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento9'], key="folha_pagamento9_input")
+    st.session_state['folha_pagamento10'] = st.number_input("Custo Hora Automação", min_value=0.0, step=100.0, format="%.2f", value=st.session_state['folha_pagamento10'], key="folha_pagamento10_input")
+    st.session_state['folha_pagamento11'] = st.number_input("Horas Gastas Automação", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento11'], key="folha_pagamento11_input")
+    st.session_state['folha_pagamento12'] = st.number_input("Custo Hora Inbound", min_value=0.0, step=100.0, format="%.2f", value=st.session_state['folha_pagamento12'], key="folha_pagamento12_input")
+    st.session_state['folha_pagamento13'] = st.number_input("Horas Gastas Inbound", min_value=0.0, step=1.0, format="%.2f", value=st.session_state['folha_pagamento13'], key="folha_pagamento13_input")
 
     # Botão de enviar
     if st.button("Enviar", key="avulsos_enviar_button"):
@@ -344,11 +344,11 @@ def pagina_lancamentos_politicas():
         st.session_state['imp'] = 0.0
 
     # Definindo os inputs com valores inicializados corretamente como float
-    st.session_state['projeto_meses'] = st.number_input("Total de Meses do Projeto", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['projeto_meses']), key="projeto_meses_input")
-    st.session_state['fat_lancamento'] = st.number_input("Faturamento", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['fat_lancamento']), key="fat_lancamento_input")
-    st.session_state['traf'] = st.number_input("Trafego %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['traf']), key="traf_input")
-    st.session_state['plat'] = st.number_input("Plataforma %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['plat']), key="plat_input")
-    st.session_state['imp'] = st.number_input("Imposto %", min_value=0.0, step=0.01, format="%.2f", value=float(st.session_state['imp']), key="imp_input")
+    st.session_state['projeto_meses'] = st.number_input("Total de Meses do Projeto", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['projeto_meses']), key="projeto_meses_input")
+    st.session_state['fat_lancamento'] = st.number_input("Faturamento", min_value=0.0, step=1000.0, format="%.2f", value=float(st.session_state['fat_lancamento']), key="fat_lancamento_input")
+    st.session_state['traf'] = st.number_input("Trafego %", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['traf']), key="traf_input")
+    st.session_state['plat'] = st.number_input("Plataforma %", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['plat']), key="plat_input")
+    st.session_state['imp'] = st.number_input("Imposto %", min_value=0.0, step=1.0, format="%.2f", value=float(st.session_state['imp']), key="imp_input")
 
     # Busca o valor de contribuicao_cliente na coleção 'answers_dados' com base no cliente_id
     contribuicao_cliente = 0.0 
