@@ -47,7 +47,7 @@ def pagina_login():
             st.error("Login ou senha incorretos.")
 
 def pagina_dados():
-    st.title('Dados')  # Título da página
+    st.title('Configurações 🛠️')  # Título da página
     st.info('🟡 Preencha os campos com as informações solicitadas 🟡')  # Informativo
 
     # Inicializa os valores na sessão com dados existentes
